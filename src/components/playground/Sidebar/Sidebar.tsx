@@ -274,7 +274,7 @@ const Sidebar = () => {
                   transition={{ duration: 0.5, ease: 'easeInOut' }}
                 >
                   <div className="text-xs font-medium uppercase text-primary">
-                    {teams.length > 0 ? 'Team' : 'Agent'}
+                    {teams.length > 0 || agents.length > 0 ? 'Teams & Agents' : 'Team/Agent'}
                   </div>
                   {isEndpointLoading ? (
                     <div className="flex w-full flex-col gap-2">
@@ -287,11 +287,9 @@ const Sidebar = () => {
                     </div>
                   ) : (
                     <>
-                      {teams.length > 0 ? (
-                        <TeamSelector />
-                      ) : agents.length > 0 ? (
-                        <AgentSelector />
-                      ) : (
+                      {teams.length > 0 && <TeamSelector />}
+                      {agents.length > 0 && <AgentSelector />}
+                      {teams.length === 0 && agents.length === 0 && (
                         <div className="flex h-9 w-full items-center justify-center rounded-xl border border-primary/15 bg-accent p-3 text-xs font-medium uppercase text-muted">
                           No Agents or Teams
                         </div>
